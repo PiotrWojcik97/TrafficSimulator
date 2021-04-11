@@ -1,0 +1,16 @@
+debug/button.o
+debug/car.o
+debug/game.o
+debug/grass.o
+debug/main.o
+debug/mainwindow.o
+debug/mapitem.o
+debug/scenemenager.o
+debug/street.o
+debug/view.o
+debug/qrc_Maps.o
+debug/qrc_images.o
+debug/moc_car.o
+debug/moc_mainwindow.o
+debug/moc_scenemenager.o
+debug/moc_view.o
