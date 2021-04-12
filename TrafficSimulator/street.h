@@ -13,14 +13,7 @@ public:
     Street(int x, int y);
     enum { Type = UserType + 1 };
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *item, QWidget *widget) override;
-    int getX();
-    int getY();
-    int type() const override
-       {
-           // Enable the use of qgraphicsitem_cast with this item.
-           return Type;
-       }
-private:
+    int type() const override;
 };
 
 #endif // STREET_H

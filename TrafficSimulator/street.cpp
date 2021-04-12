@@ -16,14 +16,8 @@ void Street::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     painter->drawRect(5, 5, 90, 90);
 }
 
-int Street::getX()
+int Street::type() const
 {
-    return this->x;
+    //Enable the use of qgraphicsitem_cast with this item.
+    return Type;
 }
-
-int Street::getY()
-{
-    return this->y;
-}
-
-

@@ -64,17 +64,9 @@ View::View(QWidget *parent)
 
     // Label layout
     QHBoxLayout *labelLayout = new QHBoxLayout;
-    //label = new QLabel(name);
     label2 = new QLabel(tr("Pointer Mode"));
     label3 = new QLabel(tr("Car Spawn Rate"));
-    //selectModeButton = new QToolButton;
-    //selectModeButton->setText(tr("Select"));
-    //selectModeButton->setCheckable(true);
-    //selectModeButton->setChecked(true);
-   // dragModeButton = new QToolButton;
-  //  dragModeButton->setText(tr("Drag"));
-   // dragModeButton->setCheckable(true);
-   // dragModeButton->setChecked(false);
+
     antialiasButton = new QToolButton;
     antialiasButton->setText(tr("Antialiasing"));
     antialiasButton->setCheckable(true);
@@ -98,14 +90,9 @@ View::View(QWidget *parent)
 
     QButtonGroup *pointerModeGroup = new QButtonGroup(this);
     pointerModeGroup->setExclusive(true);
-    //pointerModeGroup->addButton(selectModeButton);
-    //pointerModeGroup->addButton(dragModeButton);
 
-    //labelLayout->addWidget(label);
     labelLayout->addLayout(carSpawnRateSliderLayout);
     labelLayout->addWidget(label2);
-    //labelLayout->addWidget(selectModeButton);
-    //labelLayout->addWidget(dragModeButton);
     labelLayout->addStretch();
     labelLayout->addWidget(antialiasButton);
 
@@ -125,8 +112,6 @@ View::View(QWidget *parent)
             this, &View::setResetButtonEnabled);
     connect(graphicsView->horizontalScrollBar(), &QAbstractSlider::valueChanged,
             this, &View::setResetButtonEnabled);
-    //connect(selectModeButton, &QAbstractButton::toggled, this, &View::togglePointerMode);
-    //connect(dragModeButton, &QAbstractButton::toggled, this, &View::togglePointerMode);
     connect(antialiasButton, &QAbstractButton::toggled, this, &View::toggleAntialiasing);
     connect(rotateLeftIcon, &QAbstractButton::clicked, this, &View::rotateLeft);
     connect(rotateRightIcon, &QAbstractButton::clicked, this, &View::rotateRight);
@@ -171,20 +156,10 @@ void View::setupMatrix()
     setResetButtonEnabled();
 }
 
-void View::togglePointerMode()
-{
-    //graphicsView->setDragMode(//selectModeButton->isChecked()
-                             // ? QGraphicsView::RubberBandDrag
-                             // :
-     //                         QGraphicsView::ScrollHandDrag);
-    //graphicsView->setInteractive(selectModeButton->isChecked());
-}
-
 void View::toggleAntialiasing()
 {
     graphicsView->setRenderHint(QPainter::Antialiasing, antialiasButton->isChecked());
 }
-
 
 void View::zoomIn(int level)
 {
@@ -209,5 +184,4 @@ void View::rotateRight()
 void View::SetCarSpawningRate()
 {
     spawnCarTimer->start(100*carSpawnRateSlider->value());
-    //qDebug() << "time: " << 100*carSpawnRateSlider->value();
 }

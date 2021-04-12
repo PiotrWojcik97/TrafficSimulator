@@ -23,14 +23,8 @@ class Car : public QObject, public MapItem
     Q_OBJECT
 public:
     Car(int x, int y,QList<char> *_path);
-    enum { Type = UserType + 2 };
     ~Car();
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *item, QWidget *widget) override;
-    int type() const override
-       {
-           // Enable the use of qgraphicsitem_cast with this item.
-           return Type;
-       }
     void GetCarList(QList<Car*> *_carlist);
     char GetCarDir();
     bool GetleftTurnSignal();
@@ -38,8 +32,7 @@ public:
 
 public slots:
     void drive();
-protected:
-    //void timerEvent(QTimerEvent *event) override;
+
 private:
     QTimer *timer;
     QList<CarPath> path;

@@ -48,7 +48,6 @@ private slots:
     void resetView();
     void setResetButtonEnabled();
     void setupMatrix();
-    void togglePointerMode();
     void toggleAntialiasing();
     void rotateLeft();
     void rotateRight();

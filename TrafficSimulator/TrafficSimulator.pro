@@ -28,8 +28,6 @@ HEADERS += \
 FORMS +=
 
 DEFINES +=
-    GAME_WIDTH
-    GAME_HEIGHT
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
