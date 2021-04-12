@@ -1,7 +1,5 @@
 #include "car.h"
 
-#include <QDebug>
-
 Car::Car(int x, int y,QList<char> *_path)
 {
     this->x = x;
@@ -19,7 +17,6 @@ Car::Car(int x, int y,QList<char> *_path)
             path.push_back(temp);
             carIt = path.begin();
             imagePosition = *it;
-            //qDebug() << "Okeeeeeey";
             continue;
         }
 
@@ -36,11 +33,7 @@ Car::Car(int x, int y,QList<char> *_path)
             carIt++;
         }
     }
-    //for(auto it3 : path)
-        //qDebug() << it3.direction << it3.distance;
 
-    setFlags(ItemIsSelectable | ItemIsMovable);
-    setAcceptHoverEvents(true);
     timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(drive()));
     timer->start(8);    //60 FPS 17 was before
@@ -285,11 +278,3 @@ bool Car::CheckIfCarShouldDrive(int distanceToJunction)
 
     return true;
 }
-
-/*
-void Car::timerEvent(QTimerEvent *event)
-{
-    qDebug()<<"Driving!";
-    //this->x++;
-    //this->setPos(QPointF(this->x, this->y));
-}*/

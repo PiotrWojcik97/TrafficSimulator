@@ -1,16 +1,11 @@
-release/button.o
 release/car.o
-release/game.o
 release/grass.o
 release/main.o
 release/mainwindow.o
 release/mapitem.o
-release/scenemenager.o
 release/street.o
 release/view.o
 release/qrc_Maps.o
-release/qrc_images.o
 release/moc_car.o
 release/moc_mainwindow.o
-release/moc_scenemenager.o
 release/moc_view.o

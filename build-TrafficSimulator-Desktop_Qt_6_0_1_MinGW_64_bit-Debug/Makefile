@@ -185,8 +185,7 @@ Makefile: ../TrafficSimulator/TrafficSimulator.pro C:/Qt/6.0.1/mingw81_64/mkspec
 		C:/Qt/6.0.1/mingw81_64/lib/Qt6Core.prl \
 		C:/Qt/6.0.1/mingw81_64/lib/Qt6EntryPoint.prl \
 		C:/Qt/6.0.1/mingw81_64/mkspecs/features/build_pass.prf \
-		../TrafficSimulator/Maps.qrc \
-		../TrafficSimulator/images.qrc
+		../TrafficSimulator/Maps.qrc
 	$(QMAKE) -o Makefile ..\TrafficSimulator\TrafficSimulator.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 C:/Qt/6.0.1/mingw81_64/mkspecs/features/spec_pre.prf:
 C:/Qt/6.0.1/mingw81_64/mkspecs/features/device_config.prf:
@@ -304,7 +303,6 @@ C:/Qt/6.0.1/mingw81_64/lib/Qt6Core.prl:
 C:/Qt/6.0.1/mingw81_64/lib/Qt6EntryPoint.prl:
 C:/Qt/6.0.1/mingw81_64/mkspecs/features/build_pass.prf:
 ../TrafficSimulator/Maps.qrc:
-../TrafficSimulator/images.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\TrafficSimulator\TrafficSimulator.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 

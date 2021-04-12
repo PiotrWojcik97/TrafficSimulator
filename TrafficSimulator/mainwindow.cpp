@@ -1,13 +1,5 @@
 #include "mainwindow.h"
-#include "mapitem.h"
-#include "view.h"
-#include "street.h"
-#include "grass.h"
 
-#include <QHBoxLayout>
-#include <QRandomGenerator>
-#include <QTimer>
-#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent), scene(new QGraphicsScene(this))
@@ -20,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timer,SIGNAL(timeout()),this,SLOT(SpawnCar()));
     timer->start(1000);    //1 car per 1s
 
-    View *view = new View("Simulator");
+    View *view = new View();
     view->view()->setScene(scene);
     view->SetTimer(timer);
 
@@ -57,7 +49,7 @@ void MainWindow::SpawnCar()
 
 void MainWindow::populateScene()
 {
-    QFile mapFile(":/maps/map1.txt");           //File
+    QFile mapFile(":/maps/map2.txt");           //File
     if (!mapFile.open(QIODevice::ReadOnly | QIODevice::Text))
             return;
 

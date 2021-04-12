@@ -10,7 +10,6 @@
 class MapItem : public QGraphicsItem
 {
 public:
-    //MapItem(int x, int y);
     QRectF boundingRect() const override;
     QPainterPath shape() const override;
 protected:

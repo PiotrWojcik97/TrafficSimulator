@@ -1,13 +1,20 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-
 #include <QWidget>
 #include <QFile>
 #include <QVector>
 #include <QList>
+#include <QHBoxLayout>
+#include <QRandomGenerator>
+#include <QTimer>
+#include <QDebug>
 
 #include "car.h"
+#include "mapitem.h"
+#include "view.h"
+#include "street.h"
+#include "grass.h"
 
 QT_BEGIN_NAMESPACE
 class QGraphicsScene;

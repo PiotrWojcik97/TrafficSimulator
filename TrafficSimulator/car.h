@@ -4,6 +4,7 @@
 #include <QTimer>
 #include <QGraphicsScene>
 #include <QList>
+#include <QDebug>
 
 #include "mapitem.h"
 

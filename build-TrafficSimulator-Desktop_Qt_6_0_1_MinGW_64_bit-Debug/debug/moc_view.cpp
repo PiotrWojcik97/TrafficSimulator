@@ -8,6 +8,8 @@
 
 #include <memory>
 #include "../../TrafficSimulator/view.h"
+#include <QtGui/qtextcursor.h>
+#include <QScreen>
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
@@ -90,8 +92,8 @@ int GraphicsView::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     return _id;
 }
 struct qt_meta_stringdata_View_t {
-    const uint offsetsAndSize[28];
-    char stringdata0[156];
+    const uint offsetsAndSize[26];
+    char stringdata0[150];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_View_t, stringdata0) + ofs), len 
@@ -107,17 +109,15 @@ QT_MOC_LITERAL(37, 21), // "setResetButtonEnabled"
 QT_MOC_LITERAL(59, 11), // "setupMatrix"
 QT_MOC_LITERAL(71, 17), // "togglePointerMode"
 QT_MOC_LITERAL(89, 18), // "toggleAntialiasing"
-QT_MOC_LITERAL(108, 5), // "print"
-QT_MOC_LITERAL(114, 10), // "rotateLeft"
-QT_MOC_LITERAL(125, 11), // "rotateRight"
-QT_MOC_LITERAL(137, 18) // "SetCarSpawningRate"
+QT_MOC_LITERAL(108, 10), // "rotateLeft"
+QT_MOC_LITERAL(119, 11), // "rotateRight"
+QT_MOC_LITERAL(131, 18) // "SetCarSpawningRate"
 
     },
     "View\0zoomIn\0\0level\0zoomOut\0resetView\0"
     "setResetButtonEnabled\0setupMatrix\0"
     "togglePointerMode\0toggleAntialiasing\0"
-    "print\0rotateLeft\0rotateRight\0"
-    "SetCarSpawningRate"
+    "rotateLeft\0rotateRight\0SetCarSpawningRate"
 };
 #undef QT_MOC_LITERAL
 
@@ -127,7 +127,7 @@ static const uint qt_meta_data_View[] = {
        9,       // revision
        0,       // classname
        0,    0, // classinfo
-      13,   14, // methods
+      12,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -135,25 +135,23 @@ static const uint qt_meta_data_View[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,   92,    2, 0x0a,    0 /* Public */,
-       1,    0,   95,    2, 0x2a,    2 /* Public | MethodCloned */,
-       4,    1,   96,    2, 0x0a,    3 /* Public */,
-       4,    0,   99,    2, 0x2a,    5 /* Public | MethodCloned */,
-       5,    0,  100,    2, 0x08,    6 /* Private */,
-       6,    0,  101,    2, 0x08,    7 /* Private */,
-       7,    0,  102,    2, 0x08,    8 /* Private */,
-       8,    0,  103,    2, 0x08,    9 /* Private */,
-       9,    0,  104,    2, 0x08,   10 /* Private */,
-      10,    0,  105,    2, 0x08,   11 /* Private */,
-      11,    0,  106,    2, 0x08,   12 /* Private */,
-      12,    0,  107,    2, 0x08,   13 /* Private */,
-      13,    0,  108,    2, 0x08,   14 /* Private */,
+       1,    1,   86,    2, 0x0a,    0 /* Public */,
+       1,    0,   89,    2, 0x2a,    2 /* Public | MethodCloned */,
+       4,    1,   90,    2, 0x0a,    3 /* Public */,
+       4,    0,   93,    2, 0x2a,    5 /* Public | MethodCloned */,
+       5,    0,   94,    2, 0x08,    6 /* Private */,
+       6,    0,   95,    2, 0x08,    7 /* Private */,
+       7,    0,   96,    2, 0x08,    8 /* Private */,
+       8,    0,   97,    2, 0x08,    9 /* Private */,
+       9,    0,   98,    2, 0x08,   10 /* Private */,
+      10,    0,   99,    2, 0x08,   11 /* Private */,
+      11,    0,  100,    2, 0x08,   12 /* Private */,
+      12,    0,  101,    2, 0x08,   13 /* Private */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Int,    3,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,    3,
-    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -182,10 +180,9 @@ void View::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
         case 6: _t->setupMatrix(); break;
         case 7: _t->togglePointerMode(); break;
         case 8: _t->toggleAntialiasing(); break;
-        case 9: _t->print(); break;
-        case 10: _t->rotateLeft(); break;
-        case 11: _t->rotateRight(); break;
-        case 12: _t->SetCarSpawningRate(); break;
+        case 9: _t->rotateLeft(); break;
+        case 10: _t->rotateRight(); break;
+        case 11: _t->SetCarSpawningRate(); break;
         default: ;
         }
     }
@@ -199,7 +196,7 @@ const QMetaObject View::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_View_t
 
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
 
 
 >,
@@ -226,13 +223,13 @@ int View::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 13)
+        if (_id < 12)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 13;
+        _id -= 12;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 13)
+        if (_id < 12)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 13;
+        _id -= 12;
     }
     return _id;
 }
