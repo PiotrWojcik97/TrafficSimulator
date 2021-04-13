@@ -31,6 +31,7 @@ public:
     char GetCarDir();
     bool GetleftTurnSignal();
     bool GetRightTurnSignal();
+    bool CheckIfOtherCarHasRedLight();
     void PauseTimer();
     void ResumeTimer();
 
@@ -46,6 +47,10 @@ private:
     bool CheckIfCarShouldDrive(int distanceToJunction);
     bool leftTurnSignal = false;
     bool rightTurnSignal = false;
+    bool hasRedLight = false;
+    bool checkIfCarHasRedLight();
+    bool HandleRightHandRule(bool otherCarHasRedLight, bool _otherLeftTurnSingal, char _dir, int _x, int _y);
+    bool HandleCarInFrontOfTheCar(int _distanceToJunction, bool otherCarHasRedLight, bool _otherLeftTurnSingal, char _dir, int _x, int _y);
     int timerspeed = 8;
 };
 
