@@ -2,6 +2,7 @@
 
 Street::Street(int x, int y)
 {
+    this->setFlag(ItemStacksBehindParent);
     this->x = x;
     this->y = y;
 }
@@ -20,4 +21,9 @@ int Street::type() const
 {
     //Enable the use of qgraphicsitem_cast with this item.
     return Type;
+}
+
+void Street::SetTrafficLight(TrafficLight *_trafficLight)
+{
+
 }

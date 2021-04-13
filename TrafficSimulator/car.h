@@ -7,6 +7,7 @@
 #include <QDebug>
 
 #include "mapitem.h"
+#include "trafficlight.h"
 
 QT_BEGIN_NAMESPACE
 class MapItem;
@@ -26,9 +27,12 @@ public:
     ~Car();
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *item, QWidget *widget) override;
     void GetCarList(QList<Car*> *_carlist);
+    void SetTrafficLightsList(QList<TrafficLight*> *_trafficLightList);
     char GetCarDir();
     bool GetleftTurnSignal();
     bool GetRightTurnSignal();
+    void PauseTimer();
+    void ResumeTimer();
 
 public slots:
     void drive();
@@ -36,11 +40,13 @@ public slots:
 private:
     QTimer *timer;
     QList<CarPath> path;
+    QList<Car*> *carlist;
+    QList<TrafficLight*> *trafficLightList;
     char imagePosition;
     bool CheckIfCarShouldDrive(int distanceToJunction);
-    QList<Car*> *carlist;
     bool leftTurnSignal = false;
     bool rightTurnSignal = false;
+    int timerspeed = 8;
 };
 
 

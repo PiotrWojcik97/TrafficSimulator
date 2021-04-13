@@ -7,6 +7,9 @@
 #include <QtMath>
 #include <QTimer>
 #include <QDebug>
+#include <QList>
+
+#include "car.h"
 
 QT_BEGIN_NAMESPACE
 class QLabel;
@@ -35,7 +38,7 @@ class View : public QFrame
 {
     Q_OBJECT
 public:
-    explicit View(QWidget *parent = nullptr);
+    explicit View(QList<Car *> *_carlist, QWidget *parent = nullptr);
     void SetTimer(QTimer *_spawnCarTimer);
 
     QGraphicsView *view() const;
@@ -49,6 +52,8 @@ private slots:
     void setResetButtonEnabled();
     void setupMatrix();
     void toggleAntialiasing();
+    void togglePause();
+    void resetCars();
     void rotateLeft();
     void rotateRight();
     void SetCarSpawningRate();
@@ -56,14 +61,16 @@ private slots:
 private:
     GraphicsView *graphicsView;
     QLabel *label;
-    QLabel *label2;
     QLabel *label3;
     QToolButton *antialiasButton;
     QToolButton *resetButton;
+    QToolButton *pauseButton;
+    QToolButton *resetCarButton;
     QSlider *zoomSlider;
     QSlider *rotateSlider;
     QSlider *carSpawnRateSlider;
     QTimer *spawnCarTimer;
+    QList<Car *> *carlist;
 };
 
 #endif // VIEW_H

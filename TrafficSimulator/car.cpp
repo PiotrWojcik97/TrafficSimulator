@@ -4,7 +4,7 @@ Car::Car(int x, int y,QList<char> *_path)
 {
     this->x = x;
     this->y = y;
-
+    this->setFlag(ItemStacksBehindParent);
     QList<char> :: iterator it;
     QList<CarPath> :: iterator carIt;
     for(it = _path->begin(), carIt = path.begin(); it != _path->end(); ++it)
@@ -36,7 +36,7 @@ Car::Car(int x, int y,QList<char> *_path)
 
     timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(drive()));
-    timer->start(8);    //60 FPS 17 was before
+    timer->start(timerspeed);    //60 FPS 17 was before
 }
 
 Car::~Car()
@@ -102,6 +102,11 @@ void Car::GetCarList(QList<Car *> *_carlist)
     this->carlist = _carlist;
 }
 
+void Car::SetTrafficLightsList(QList<TrafficLight *> *_trafficLightList)
+{
+    this->trafficLightList = _trafficLightList;
+}
+
 char Car::GetCarDir()
 {
     return imagePosition;
@@ -115,6 +120,16 @@ bool Car::GetleftTurnSignal()
 bool Car::GetRightTurnSignal()
 {
     return rightTurnSignal;
+}
+
+void Car::PauseTimer()
+{
+    timer->stop();
+}
+
+void Car::ResumeTimer()
+{
+    timer->start(timerspeed);
 }
 
 void Car::drive()

@@ -15,6 +15,7 @@
 #include "view.h"
 #include "street.h"
 #include "grass.h"
+#include "trafficlight.h"
 
 QT_BEGIN_NAMESPACE
 class QGraphicsScene;
@@ -32,8 +33,10 @@ private:
     void setupMatrix();
     void populateScene();
     void calculatePath(QList<char> *path, QPointF _sPoint, QPointF _ePoint);
+    void SetUpTrafficLights();
     QVector<QPointF> spawningPoints;
     QList<Car*> carList;
+    QList<TrafficLight*> trafficSignsList;
     QGraphicsScene *scene;
     //QList<QGraphicsItem> streets;
     bool checkNearestStreet(char _forbiddenDirection,QList<char> *path, QPointF _sPoint, QPointF _ePoint);

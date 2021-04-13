@@ -2,6 +2,7 @@
 
 Grass::Grass(int x, int y)
 {
+    this->setFlag(ItemStacksBehindParent);
     this->x = x;
     this->y = y;
 }

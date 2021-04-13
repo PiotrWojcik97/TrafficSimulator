@@ -15,9 +15,10 @@ void GraphicsView::wheelEvent(QWheelEvent *e)
 }
 #endif
 
-View::View(QWidget *parent)
+View::View(QList<Car *> *_carlist,QWidget *parent)
     : QFrame(parent)
 {
+    this->carlist = _carlist;
     setFrameStyle(Sunken | StyledPanel);
     graphicsView = new GraphicsView(this);
     graphicsView->setRenderHint(QPainter::Antialiasing, false);
@@ -64,9 +65,14 @@ View::View(QWidget *parent)
 
     // Label layout
     QHBoxLayout *labelLayout = new QHBoxLayout;
-    label2 = new QLabel(tr("Pointer Mode"));
     label3 = new QLabel(tr("Car Spawn Rate"));
 
+    pauseButton = new QToolButton;
+    pauseButton->setText(tr("Pause"));
+    pauseButton->setCheckable(true);
+    pauseButton->setChecked(false);
+    resetCarButton = new QToolButton;
+    resetCarButton->setText(tr("Reset Cars"));
     antialiasButton = new QToolButton;
     antialiasButton->setText(tr("Antialiasing"));
     antialiasButton->setCheckable(true);
@@ -92,7 +98,8 @@ View::View(QWidget *parent)
     pointerModeGroup->setExclusive(true);
 
     labelLayout->addLayout(carSpawnRateSliderLayout);
-    labelLayout->addWidget(label2);
+    labelLayout->addWidget(resetCarButton);
+    labelLayout->addWidget(pauseButton);
     labelLayout->addStretch();
     labelLayout->addWidget(antialiasButton);
 
@@ -113,6 +120,8 @@ View::View(QWidget *parent)
     connect(graphicsView->horizontalScrollBar(), &QAbstractSlider::valueChanged,
             this, &View::setResetButtonEnabled);
     connect(antialiasButton, &QAbstractButton::toggled, this, &View::toggleAntialiasing);
+    connect(resetCarButton, &QAbstractButton::clicked, this, &View::resetCars);
+    connect(pauseButton, &QAbstractButton::toggled, this, &View::togglePause);
     connect(rotateLeftIcon, &QAbstractButton::clicked, this, &View::rotateLeft);
     connect(rotateRightIcon, &QAbstractButton::clicked, this, &View::rotateRight);
 
@@ -159,6 +168,29 @@ void View::setupMatrix()
 void View::toggleAntialiasing()
 {
     graphicsView->setRenderHint(QPainter::Antialiasing, antialiasButton->isChecked());
+}
+
+void View::togglePause()
+{
+    if(pauseButton->isChecked())
+    {
+        spawnCarTimer->stop();
+        for( auto it : *carlist)
+            it->PauseTimer();
+    }
+    else
+    {
+        spawnCarTimer->start(100*carSpawnRateSlider->value());
+        for( auto it : *carlist)
+            it->ResumeTimer();
+    }
+}
+
+void View::resetCars()
+{
+    for( auto it : *carlist)
+        delete it;
+    carlist->clear();
 }
 
 void View::zoomIn(int level)

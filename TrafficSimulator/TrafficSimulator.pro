@@ -15,6 +15,7 @@ SOURCES += \
     mainwindow.cpp \
     mapitem.cpp \
     street.cpp \
+    trafficlight.cpp \
     view.cpp
 
 HEADERS += \
@@ -23,6 +24,7 @@ HEADERS += \
     mainwindow.h \
     mapitem.h \
     street.h \
+    trafficlight.h \
     view.h
 
 FORMS +=

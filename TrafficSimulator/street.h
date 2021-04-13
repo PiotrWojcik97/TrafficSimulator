@@ -2,6 +2,7 @@
 #define STREET_H
 
 #include "mapitem.h"
+#include "trafficlight.h"
 
 QT_BEGIN_NAMESPACE
 class MapItem;
@@ -14,6 +15,7 @@ public:
     enum { Type = UserType + 1 };
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *item, QWidget *widget) override;
     int type() const override;
+    void SetTrafficLight(TrafficLight *_trafficLight);
 };
 
 #endif // STREET_H
