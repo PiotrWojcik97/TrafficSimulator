@@ -220,7 +220,7 @@ void Car::drive()
 
 bool Car::CheckIfCarShouldDrive(int distanceToJunction)
 {
-    if(checkIfCarHasRedLight())
+    if(checkIfCarHasRedLight<bool>())
         return false;
 
     for (auto it: *carlist)
@@ -266,8 +266,8 @@ bool Car::CheckIfCarShouldDrive(int distanceToJunction)
 
     return true;
 }
-
-bool Car::checkIfCarHasRedLight()
+template<class T>
+T Car::checkIfCarHasRedLight()
 {
     for (auto it: *trafficLightList)
     {

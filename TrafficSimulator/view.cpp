@@ -141,11 +141,6 @@ void View::SetTimer(QTimer *_spawnCarTimer)
     this->spawnCarTimer = _spawnCarTimer;
 }
 
-void View::SetFunctionPtr(void (*_functionPointer)(void))
-{
-    this->functionPointer = *_functionPointer;
-}
-
 QGraphicsView *View::view() const
 {
     return static_cast<QGraphicsView *>(graphicsView);

@@ -14,7 +14,6 @@ MainWindow::MainWindow(QWidget *parent)
     View *view = new View(&carList);
     view->view()->setScene(scene);
     view->SetTimer(timer);
-
     connect(view,&View::MapIndexChanged,
             this,&MainWindow::ChangeMap);
 

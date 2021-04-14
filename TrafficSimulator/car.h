@@ -54,7 +54,8 @@ private:
     bool leftTurnSignal = false;
     bool rightTurnSignal = false;
     bool hasRedLight = false;
-    bool checkIfCarHasRedLight();
+    template<class T>
+    T checkIfCarHasRedLight();
     bool HandleRightHandRule(bool otherCarHasRedLight, bool _otherLeftTurnSingal, char _dir, int _x, int _y);
     bool HandleCarInFrontOfTheCar(int _distanceToJunction, bool otherCarHasRedLight, bool _otherLeftTurnSingal, char _dir, int _x, int _y);
     int timerspeed = 8;

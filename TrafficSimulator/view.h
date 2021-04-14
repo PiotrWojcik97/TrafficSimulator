@@ -45,7 +45,6 @@ class View : public QFrame
 public:
     explicit View(QList<Car *> *_carlist, QWidget *parent = nullptr);
     void SetTimer(QTimer *_spawnCarTimer);
-    void SetFunctionPtr( void(*_functionPointer)(void) );
 
     QGraphicsView *view() const;
 
@@ -81,7 +80,6 @@ private:
     QTimer *spawnCarTimer;
     QComboBox *dropDownList;
     QList<Car *> *carlist;
-    void (*functionPointer)(void);
 };
 
 #endif // VIEW_H
