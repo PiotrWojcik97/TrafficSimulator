@@ -5,6 +5,7 @@ Car::Car(int x, int y,QList<char> *_path)
     this->x = x;
     this->y = y;
     this->setFlag(ItemStacksBehindParent);
+    this->setFlag(ItemIsSelectable);
     QList<char> :: iterator it;
     QList<CarPath> :: iterator carIt;
     for(it = _path->begin(), carIt = path.begin(); it != _path->end(); ++it)

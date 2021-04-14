@@ -18,7 +18,10 @@ struct LightStr
     bool isPresent = false;
     bool isRed = true;
 };
-
+/**
+ * @brief The TrafficLight class
+ * Handles Trafic lights behaviour.
+ */
 class TrafficLight : public QObject, public MapItem
 {
     Q_OBJECT

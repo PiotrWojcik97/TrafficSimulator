@@ -20,7 +20,20 @@
 QT_BEGIN_NAMESPACE
 class QGraphicsScene;
 QT_END_NAMESPACE
-
+/**
+ * @brief The MainWindow class
+ * Handles MainWindow of the application.
+ * In this class there are implemented:
+ * -spawning car feature.
+ * -findpath algorithm feature.
+ * -handling of scene maps.
+ * -initializing of all scene objects.
+ * PROCLAIMER:
+ * findpath algorithm does not work with find the shorthest path,
+ * also it is capable of finding end to end path. It does not work
+ * with scenario when multiple paths can lead to end point.
+ * It does not have any protection against doom maps.
+ */
 class MainWindow : public QWidget
 {
     Q_OBJECT
@@ -31,14 +44,15 @@ public slots:
 
 private:
     void setupMatrix();
-    void populateScene();
+    void populateScene(int mapIndex);
+    void ChangeMap(int index);
     void calculatePath(QList<char> *path, QPointF _sPoint, QPointF _ePoint);
     void SetUpTrafficLights();
+    void CleanCurrentScene();
     QVector<QPointF> spawningPoints;
     QList<Car*> carList;
     QList<TrafficLight*> trafficSignsList;
     QGraphicsScene *scene;
-    //QList<QGraphicsItem> streets;
     bool checkNearestStreet(char _forbiddenDirection,QList<char> *path, QPointF _sPoint, QPointF _ePoint);
 
 };

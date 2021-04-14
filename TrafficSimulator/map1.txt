@@ -1,12 +1,9 @@
-0 0 0 0 P 0 0 P 0 0 0 0
-0 G G G S G G S G G G 0
-P S S S S S S S G G G 0
-0 G G G G G G S G G G 0
-0 G G G G G G S G G G 0
-P S S S S S S S S S S P
-0 G G G S G G G G G G 0
-0 G G G S G S S S S G 0
-0 G G G S G S G G S G 0
-0 G G G S S S G G S G 0
-0 G G G S G G G G S G 0
-0 0 0 0 P 0 0 0 0 P 0 0
+0 0 0 0 P 0 0 0 0
+0 G G G S G G G 0
+0 G G G S G G G 0
+0 G G G S G G G 0
+P S S S T S S S P
+0 G G G S G G G 0
+0 G G G S G G G 0
+0 G G G S G G G 0
+0 0 0 0 P 0 0 0 0

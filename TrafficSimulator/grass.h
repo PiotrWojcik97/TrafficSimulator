@@ -7,7 +7,10 @@
 QT_BEGIN_NAMESPACE
 class MapItem;
 QT_END_NAMESPACE
-
+/**
+ * @brief The Grass class
+ * does not have special actions.
+ */
 class Grass : public MapItem
 {
 public:

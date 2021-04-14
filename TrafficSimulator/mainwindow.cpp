@@ -5,8 +5,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent), scene(new QGraphicsScene(this))
 {
     scene->setItemIndexMethod(QGraphicsScene::NoIndex);
-    populateScene();
-
+    populateScene(0);
 
     QTimer *timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(SpawnCar()));
@@ -15,6 +14,9 @@ MainWindow::MainWindow(QWidget *parent)
     View *view = new View(&carList);
     view->view()->setScene(scene);
     view->SetTimer(timer);
+
+    connect(view,&View::MapIndexChanged,
+            this,&MainWindow::ChangeMap);
 
     QHBoxLayout *layout = new QHBoxLayout;
     layout->addWidget(view);
@@ -46,58 +48,98 @@ void MainWindow::SpawnCar()
     scene->addItem(item);
 }
 
-void MainWindow::populateScene()
+void MainWindow::populateScene(int mapIndex)
 {
-    QFile mapFile(":/maps/map2.txt");           //File
-    if (!mapFile.open(QIODevice::ReadOnly | QIODevice::Text))
-            return;
+    QFile *mapFile;
 
-    QTextStream in(&mapFile);
-    QString line = in.readLine();
-    int columnY = 0;
-    int mapSize[2] = {0,0};
-    while (!line.isNull())
+    switch(mapIndex)
     {
-        for(int i=0, rowX=0; i<line.length();i++)
+        case 0:
         {
-            if(line[i] != ' ')                  //If in file is space, skip it
-            {
-                if(line[i] == 'S' || line[i] == 'T')              //If in file is S, paint steet
-                {
-                    Street *item = new Street(rowX, columnY);
-                    item->setPos(QPointF(rowX*100, columnY*100));
-                    scene->addItem(item);
-                    if(line[i] == 'T')
-                    {
-                        TrafficLight *trafficLight = new TrafficLight(rowX, columnY);
-                        trafficSignsList.push_back(trafficLight);
-                        trafficLight->setPos(QPointF(rowX*100, columnY*100));
-                        item->SetTrafficLight(trafficLight);
-                    }
-                }
-                if(line[i] == 'G')              //If in file is G, paint grass
-                {
-                    QGraphicsItem *item = new Grass(rowX, columnY);
-                    item->setPos(QPointF(rowX*100, columnY*100));
-                    scene->addItem(item);
-                }
-                if(line[i] == 'P')              //If in file is P, spawn point
-                {
-                    spawningPoints.push_back(QPointF(rowX*100, columnY*100));
-                }
-                rowX++;
-            }
-            if(i+1 == line.length())
-                if(mapSize[0] < rowX)
-                    mapSize[0] = rowX;
+            qDebug() << "option 0";
+            mapFile = new QFile(":/maps/map1.txt");           //File
+            if (!mapFile->open(QIODevice::ReadOnly | QIODevice::Text))
+                    return;
+            break;
         }
-        line = in.readLine();
-        if(!line.isNull())
-            columnY++;
+        case 1:
+        {
+            qDebug() << "option 1";
+            mapFile = new QFile(":/maps/map2.txt");           //File
+            if (!mapFile->open(QIODevice::ReadOnly | QIODevice::Text))
+                    return;
+            break;
+        }
+        case 2:
+        {
+            qDebug() << "option 2";
+            mapFile = new QFile(":/maps/map3.txt");           //File
+            if (!mapFile->open(QIODevice::ReadOnly | QIODevice::Text))
+                    return;
+            break;
+        }
+        default:
+        {
+            qDebug() << "default scenario";
+            mapFile = new QFile(":/maps/map1.txt");           //File
+            if (!mapFile->open(QIODevice::ReadOnly | QIODevice::Text))
+                    return;
+            break;
+        }
     }
-    SetUpTrafficLights();
-    mapSize[1] = columnY;
+    if(mapFile != NULL)
+    {
+        QTextStream in(mapFile);
+        QString line = in.readLine();
+        int columnY = 0;
+        int mapSize[2] = {0,0};
+        while (!line.isNull())
+        {
+            for(int i=0, rowX=0; i<line.length();i++)
+            {
+                if(line[i] != ' ')                  //If in file is space, skip it
+                {
+                    if(line[i] == 'S' || line[i] == 'T')              //If in file is S, paint steet
+                    {
+                        Street *item = new Street(rowX, columnY);
+                        item->setPos(QPointF(rowX*100, columnY*100));
+                        scene->addItem(item);
+                        if(line[i] == 'T')
+                        {
+                            TrafficLight *trafficLight = new TrafficLight(rowX, columnY);
+                            trafficSignsList.push_back(trafficLight);
+                            trafficLight->setPos(QPointF(rowX*100, columnY*100));
+                        }
+                    }
+                    if(line[i] == 'G')              //If in file is G, paint grass
+                    {
+                        QGraphicsItem *item = new Grass(rowX, columnY);
+                        item->setPos(QPointF(rowX*100, columnY*100));
+                        scene->addItem(item);
+                    }
+                    if(line[i] == 'P')              //If in file is P, spawn point
+                    {
+                        spawningPoints.push_back(QPointF(rowX*100, columnY*100));
+                    }
+                    rowX++;
+                }
+                if(i+1 == line.length())
+                    if(mapSize[0] < rowX)
+                        mapSize[0] = rowX;
+            }
+            line = in.readLine();
+            if(!line.isNull())
+                columnY++;
+        }
+        SetUpTrafficLights();
+        mapSize[1] = columnY;
+    }
+}
 
+void MainWindow::ChangeMap(int index)
+{
+    CleanCurrentScene();
+    populateScene(index);
 }
 
 bool MainWindow::checkNearestStreet(char _forbiddenDirection,QList<char> *path, QPointF _sPoint, QPointF _ePoint)
@@ -241,4 +283,18 @@ void MainWindow::SetUpTrafficLights()
         }
         scene->addItem(it);
     }
+}
+
+void MainWindow::CleanCurrentScene()
+{
+    foreach (QGraphicsItem* item, scene->items())
+    {
+        if (item->type() == Street::Type || item->type() == MapItem::Type)
+        {
+            delete item;
+        }
+    }
+    spawningPoints.clear();
+    carList.clear();
+    trafficSignsList.clear();
 }

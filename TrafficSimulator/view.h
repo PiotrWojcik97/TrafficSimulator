@@ -4,10 +4,10 @@
 #include <QFrame>
 #include <QGraphicsView>
 #include <QtWidgets>
-#include <QtMath>
 #include <QTimer>
 #include <QDebug>
 #include <QList>
+#include <QComboBox>
 
 #include "car.h"
 
@@ -33,19 +33,27 @@ protected:
 private:
     View *view;
 };
-
+/**
+ * @brief The View class
+ * Handles widgets in borders of the scene e.g.
+ * buttons, dropdownlist, sliders
+ * and activities with those widgets.
+ */
 class View : public QFrame
 {
     Q_OBJECT
 public:
     explicit View(QList<Car *> *_carlist, QWidget *parent = nullptr);
     void SetTimer(QTimer *_spawnCarTimer);
+    void SetFunctionPtr( void(*_functionPointer)(void) );
 
     QGraphicsView *view() const;
 
 public slots:
     void zoomIn(int level = 1);
     void zoomOut(int level = 1);
+signals:
+    void MapIndexChanged(int index);
 
 private slots:
     void resetView();
@@ -57,6 +65,7 @@ private slots:
     void rotateLeft();
     void rotateRight();
     void SetCarSpawningRate();
+    void HandleDropDownList(int index);
 
 private:
     GraphicsView *graphicsView;
@@ -70,7 +79,9 @@ private:
     QSlider *rotateSlider;
     QSlider *carSpawnRateSlider;
     QTimer *spawnCarTimer;
+    QComboBox *dropDownList;
     QList<Car *> *carlist;
+    void (*functionPointer)(void);
 };
 
 #endif // VIEW_H

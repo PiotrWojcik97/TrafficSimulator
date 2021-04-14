@@ -19,6 +19,7 @@ View::View(QList<Car *> *_carlist,QWidget *parent)
     : QFrame(parent)
 {
     this->carlist = _carlist;
+
     setFrameStyle(Sunken | StyledPanel);
     graphicsView = new GraphicsView(this);
     graphicsView->setRenderHint(QPainter::Antialiasing, false);
@@ -63,7 +64,7 @@ View::View(QList<Car *> *_carlist,QWidget *parent)
     resetButton->setText(tr("Reset View"));
     resetButton->setEnabled(false);
 
-    // Label layout
+    // Label layout(TOP one)
     QHBoxLayout *labelLayout = new QHBoxLayout;
     label3 = new QLabel(tr("Car Spawn Rate"));
 
@@ -83,6 +84,11 @@ View::View(QList<Car *> *_carlist,QWidget *parent)
     carSpawnRateSlider->setMaximum(100);
     carSpawnRateSlider->setValue(10);
     carSpawnRateSlider->setTickPosition(QSlider::TicksBelow);
+    dropDownList = new QComboBox;
+    dropDownList->addItem("Map 1");
+    dropDownList->addItem("Map 2");
+    dropDownList->addItem("Map 3");
+
 
     QHBoxLayout *carSpawnRateSliderLayoutTOP = new QHBoxLayout;
     carSpawnRateSliderLayoutTOP->addStretch();
@@ -100,6 +106,7 @@ View::View(QList<Car *> *_carlist,QWidget *parent)
     labelLayout->addLayout(carSpawnRateSliderLayout);
     labelLayout->addWidget(resetCarButton);
     labelLayout->addWidget(pauseButton);
+    labelLayout->addWidget(dropDownList);
     labelLayout->addStretch();
     labelLayout->addWidget(antialiasButton);
 
@@ -124,13 +131,19 @@ View::View(QList<Car *> *_carlist,QWidget *parent)
     connect(pauseButton, &QAbstractButton::toggled, this, &View::togglePause);
     connect(rotateLeftIcon, &QAbstractButton::clicked, this, &View::rotateLeft);
     connect(rotateRightIcon, &QAbstractButton::clicked, this, &View::rotateRight);
-
+    connect(dropDownList, QOverload<int>::of(&QComboBox::currentIndexChanged),
+        [=](int index){ HandleDropDownList(index); });
     setupMatrix();
 }
 
 void View::SetTimer(QTimer *_spawnCarTimer)
 {
     this->spawnCarTimer = _spawnCarTimer;
+}
+
+void View::SetFunctionPtr(void (*_functionPointer)(void))
+{
+    this->functionPointer = *_functionPointer;
 }
 
 QGraphicsView *View::view() const
@@ -216,4 +229,9 @@ void View::rotateRight()
 void View::SetCarSpawningRate()
 {
     spawnCarTimer->start(100*carSpawnRateSlider->value());
+}
+
+void View::HandleDropDownList(int index)
+{
+    emit MapIndexChanged(index);
 }

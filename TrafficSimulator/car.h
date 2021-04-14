@@ -18,7 +18,13 @@ struct CarPath
     char direction;
     int distance;
 };
-
+/**
+ * @brief The Car class
+ * Handles the Car behavior:
+ * -detects near approaching cars.
+ * -detects near traffics light.
+ * -makes decision if ride or not to ride.
+ */
 class Car : public QObject, public MapItem
 {
     Q_OBJECT

@@ -7,7 +7,12 @@
 QT_BEGIN_NAMESPACE
 class MapItem;
 QT_END_NAMESPACE
-
+/**
+ * @brief The Street class
+ * Streets are present on a map.
+ * Have special Type to gain possibility to
+ * distinguish between others map items.
+ */
 class Street : public MapItem
 {
 public:
@@ -15,7 +20,6 @@ public:
     enum { Type = UserType + 1 };
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *item, QWidget *widget) override;
     int type() const override;
-    void SetTrafficLight(TrafficLight *_trafficLight);
 };
 
 #endif // STREET_H
